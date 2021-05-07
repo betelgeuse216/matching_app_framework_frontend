@@ -28,6 +28,13 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  provider: ^5.0.0
+  image_cropper: ^1.4.0
+  dio: ^4.0.0
+  flutter_picker: ^2.0.1
+  json_serializable: ^4.1.1
+  adobe_xd: ^2.0.0+1
+  flutter_tindercard: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -38,6 +45,12 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+
+  assets:
+    - assets/mio_imada.jpg
+    - assets/mio_imada2.jpg
+    - assets/logo.jpg
+    - assets/logo.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
