@@ -1,5 +1,10 @@
 {
   "@@locale": "ja",
+  "app_name": "マッチングアプリフレームワーク",
+  "title_login": "ログイン",
+  "title_home": "ホーム",
+  "title_profile": "プロフィール",
+  "title_profile_photo": "写真",
   "hello": "ようこそ {name}",
   "login": "ログイン",
   "info": "情報",

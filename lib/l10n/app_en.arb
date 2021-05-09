@@ -1,5 +1,10 @@
 {
   "@@locale":"en",
+  "app_name": "Matching App Framework",
+  "title_login": "Login",
+  "title_home": "Home",
+  "title_profile": "Profile",
+  "title_profile_photo": "Photo",
   "hello": "Hello {name}",
   "@hello": {
       "description": "welcome message",

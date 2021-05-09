@@ -12,24 +12,13 @@ import 'dart:async';
 import 'dart:ui' as ui;
 import 'dart:convert';
 
-import 'package:matching_app_framework/ui/appbar.dart';
-import 'package:matching_app_framework/ui/appbar_bottom.dart';
-import 'package:matching_app_framework/ui/swap_card.dart';
-
-import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:matching_app_framework/ui/parts/appbar.dart';
+import 'package:matching_app_framework/ui/parts/appbar_bottom.dart';
+import 'package:matching_app_framework/ui/parts/swap_card.dart';
 
 // class Home extends StatefulWidget {
 class Home extends StatefulWidget {
   Home({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -60,23 +49,22 @@ class _HomeState extends State<Home> {
     // - https://0gviiw91l1.execute-api.us-east-1.amazonaws.com/Prod/profile/1/images
     // var url = Uri.https("0gviiw91l1.execute-api.us-east-1.amazonaws.com","Prod/profile/1/images", {});
     http.get(url).then((response) {
-        //print(response.statusCode);
-        // print(response.body);
-        // Map resJson = json.decode(response.body);
-        // print(resJson);
+        print(response.statusCode);
+        print(response.body);
+        Map resJson = json.decode(response.body);
+        print(resJson);
         // for (var k in resJson.keys) {
         //   print('key is ' + k + '.');
         // }
         // for (var v in resJson.values) {
         //   print('value is ' + v.toString() + '.');
         // }
-        // resJson.forEach((var k, var v) {
-        //   print(k + " => " + v.toString());
-        // });
+        resJson.forEach((var k, var v) {
+          print(k + " => " + v.toString());
+        });
     });
 
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +72,7 @@ class _HomeState extends State<Home> {
     SwapCard swapCard = new SwapCard();
 
     return Scaffold(
-      appBar: getAppBar(context, widget.title),
+      appBar: getAppBar(context, AppLocalizations.of(context).title_home),
       bottomNavigationBar: getAppBarBottom(context, widget.title),
       body: Center(
         child: Column(
@@ -98,7 +86,7 @@ class _HomeState extends State<Home> {
               'カードの下の方だよ'
             ),
             Text(
-              AppLocalizations.of(context).hello("kazutxt"),
+              AppLocalizations.of(context).hello("My son"),
             ),
             Text(
               AppLocalizations.of(context).allow,
