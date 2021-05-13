@@ -76,24 +76,30 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: getAppBarBottom(context, widget.title),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.height * 0.6,
+              height: MediaQuery.of(context).size.height * 0.7,
+              margin: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.width * 0.05,
+              ),
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.width * 0.05,
+              ),
               child: swapCard.getSwapCard(context),
             ),
-            Text(
-              'カードの下の方だよ'
-            ),
-            Text(
-              AppLocalizations.of(context).hello("My son"),
-            ),
-            Text(
-              AppLocalizations.of(context).allow,
-            ),
-            Text(
-              AppLocalizations.of(context).deny,
-            ),
+            // Text(
+            //   'カードの下の方だよ'
+            // ),
+            // Text(
+            //   AppLocalizations.of(context).hello("My son"),
+            // ),
+            // Text(
+            //   AppLocalizations.of(context).allow,
+            // ),
+            // Text(
+            //   AppLocalizations.of(context).deny,
+            // ),
             Text(
               '$_counter' + ' LIKE!',
               style: Theme.of(context).textTheme.headline4,
@@ -101,7 +107,8 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',

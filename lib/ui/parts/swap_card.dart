@@ -29,12 +29,15 @@ class SwapCard {
       totalNum: welcomeImages.length,
       stackNum: 3,
       swipeEdge: 4.0,
-      maxWidth: MediaQuery.of(context).size.width * 0.9,
-      maxHeight: MediaQuery.of(context).size.width * 0.9,
+      maxWidth: MediaQuery.of(context).size.width,
+      maxHeight: MediaQuery.of(context).size.height,
       minWidth: MediaQuery.of(context).size.width * 0.8,
-      minHeight: MediaQuery.of(context).size.width * 0.8,
+      minHeight: MediaQuery.of(context).size.height * 0.8,
       cardBuilder: (context, index) => Card(
-        child: Image.asset('${welcomeImages[index]}'),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15.0),
+          child: Image.asset('${welcomeImages[index]}', fit: BoxFit.cover),
+        ),
       ),
       cardController: controller = CardController(),
       swipeUpdateCallback:
