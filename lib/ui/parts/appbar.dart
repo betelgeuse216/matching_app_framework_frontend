@@ -13,7 +13,7 @@ AppBar getAppBar(BuildContext context, text) {
   return AppBar(
     centerTitle: true,
     // title: Text('' + text, style: TextStyle(fontSize: 32.0)),
-    title: Text('' + text, style: TextStyle(fontSize: 32.0)),
+    title: Text('' + text, style: TextStyle(fontSize: 20.0)),
     // leading: _buildProfileIconButton(),
     leading: IconButton(
       icon: SvgPicture.string(

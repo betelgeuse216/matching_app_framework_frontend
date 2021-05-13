@@ -5,7 +5,7 @@ ThemeData getThemeData() {
     // primarySwatch: Colors.pink,
     brightness: Brightness.light,
     // primaryColor: Colors.pinkAccent[100],
-    primaryColor: Colors.blue,
+    primaryColor: Colors.white,
     accentColor: Colors.pinkAccent[200],
   );
 }
