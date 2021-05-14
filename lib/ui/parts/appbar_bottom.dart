@@ -6,6 +6,8 @@ import 'package:adobe_xd/pinned.dart';
 import 'package:adobe_xd/page_link.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+// BottomNavigationBarItemで実装？
+
 BottomAppBar getAppBarBottom(BuildContext context, text) {
   return BottomAppBar(
     color: Theme.of(context).primaryColor,
@@ -20,7 +22,7 @@ BottomAppBar getAppBarBottom(BuildContext context, text) {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: new Row(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           IconButton(
             icon: SvgPicture.string(
@@ -30,6 +32,7 @@ BottomAppBar getAppBarBottom(BuildContext context, text) {
             ),
             onPressed: () {},
           ),
+          // Text('IconButton'),
           IconButton(
             icon: SvgPicture.string(
               '<svg viewBox="28.0 619.0 20.0 20.0" ><path transform="translate(7.5, 619.01)" d="M 29.42662239074707 0.6830438375473022 L 26.98550605773926 5.8542799949646 L 21.52383232116699 6.68620777130127 C 20.54439735412598 6.834627151489258 20.1518726348877 8.096190452575684 20.86215400695801 8.818757057189941 L 24.81354713439941 12.84169960021973 L 23.87897300720215 18.52459144592285 C 23.71074867248535 19.55180358886719 24.74625587463379 20.32124328613281 25.61355018615723 19.84083366394043 L 30.4995174407959 17.15757179260254 L 35.38549041748047 19.84083366394043 C 36.25277709960938 20.31733512878418 37.28829193115234 19.55180358886719 37.12006378173828 18.52458953857422 L 36.18548583984375 12.84169960021973 L 40.13688659667969 8.818756103515625 C 40.84716033935547 8.096189498901367 40.45464324951172 6.834625244140625 39.47519683837891 6.68620777130127 L 34.01352691650391 5.8542799949646 L 31.57242012023926 0.6830438375473022 C 31.13503456115723 -0.2387173175811768 29.86774635314941 -0.2504346072673798 29.42662620544434 0.6830438375473022 Z" fill="#111111" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>',
@@ -38,13 +41,13 @@ BottomAppBar getAppBarBottom(BuildContext context, text) {
             ),
             onPressed: () {},
           ),
-          IconButton(
-            icon: Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
+          // IconButton(
+          //   icon: Icon(
+          //     Icons.search,
+          //     color: Colors.white,
+          //   ),
+          //   onPressed: () {},
+          // ),
           // Adobe XD layer: 'menu-message' (group)
           IconButton(
             icon: SvgPicture.string(
