@@ -54,7 +54,7 @@ AppBar getAppBar(BuildContext context, text) {
       onPressed: (){
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ProfilePage(title: AppLocalizations.of(context).hello("kazutxt")),
+            MaterialPageRoute(builder: (context) => ProfilePage(title: AppLocalizations.of(context).hello("ぴーくん")),
             )
         );
       },

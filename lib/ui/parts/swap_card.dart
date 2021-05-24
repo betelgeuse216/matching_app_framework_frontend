@@ -3,6 +3,7 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'dart:async';
 
 import 'package:matching_app_framework/ui/parts/dialog.dart';
+import 'package:matching_app_framework/service/profile.dart';
 
 import 'package:adobe_xd/pinned.dart';
 import 'package:adobe_xd/page_link.dart';
@@ -21,7 +22,22 @@ class SwapCard {
     "assets/mio_imada2.jpg",
   ];
 
+  Map profileList = {};
+
+  void setProfileList(Map profileList) {
+    this.profileList = profileList;
+    if (this.profileList != null) {
+      this.welcomeImages = [];
+      this.profileList.forEach((key, value) {
+        this.welcomeImages.add(value['image_data']);
+      });
+    }
+  }
+
   TinderSwapCard getSwapCard(BuildContext context) {
+
+    Map profileList = {};
+
     return new TinderSwapCard(
       swipeUp: true,
       swipeDown: true,
