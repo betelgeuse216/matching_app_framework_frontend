@@ -3,6 +3,7 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'dart:async';
 
 import 'package:matching_app_framework/ui/parts/dialog.dart';
+import 'package:matching_app_framework/model/profile.dart';
 
 import 'package:adobe_xd/pinned.dart';
 import 'package:adobe_xd/page_link.dart';
@@ -21,12 +22,24 @@ class SwapCard {
     "assets/mio_imada2.jpg",
   ];
 
-  TinderSwapCard getSwapCard(BuildContext context) {
+  List profileList;
+
+  void setProfileList(List profileList) {
+    this.profileList = profileList;
+    if (this.profileList != null) {
+      for (var i = 0; i < this.profileList.length; i++) {
+        //print(this.profileList[i]['image_data']);
+      }
+    }
+  }
+
+  TinderSwapCard getSwapCard(BuildContext context, List<Profile> profiles) {
+
     return new TinderSwapCard(
       swipeUp: true,
       swipeDown: true,
       orientation: AmassOrientation.BOTTOM,
-      totalNum: welcomeImages.length,
+      totalNum: (profiles != null) ? profiles.length : 1,
       stackNum: 3,
       swipeEdge: 4.0,
       maxWidth: MediaQuery.of(context).size.width,
@@ -36,7 +49,7 @@ class SwapCard {
       cardBuilder: (context, index) => Card(
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15.0),
-          child: Image.asset('${welcomeImages[index]}', fit: BoxFit.cover),
+          child: Image.network((profiles != null) ? profiles[index].imageData : "https://matching-app-fw.s3-ap-northeast-1.amazonaws.com/assets/mio_imada.jpg", fit: BoxFit.cover),
         ),
       ),
       cardController: controller = CardController(),
@@ -56,7 +69,8 @@ class SwapCard {
       },
       swipeCompleteCallback:
           (CardSwipeOrientation orientation, int index) {
-        /// Get orientation & index of swiped card!
+          /// Get orientation & index of swiped card!
+            ///
       },
     );
   }

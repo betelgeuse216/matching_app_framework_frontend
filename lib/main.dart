@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: getThemeData(),
       home: Home(title: 'Matching App Framework'),
-      locale: Locale('ja'),
+      locale: Locale('en'),
     );
   }
 }
