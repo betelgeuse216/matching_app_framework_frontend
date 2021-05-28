@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -16,10 +17,16 @@ import 'dart:convert';
 
 import 'package:matching_app_framework/service/profile.dart';
 
+import 'package:matching_app_framework/model/profile.dart';
 import 'package:matching_app_framework/ui/parts/appbar.dart';
 import 'package:matching_app_framework/ui/parts/appbar_bottom.dart';
 import 'package:matching_app_framework/ui/parts/swap_card.dart';
+import 'package:matching_app_framework/ui/parts/dialog.dart';
+import 'package:matching_app_framework/ui/profile.dart';
 import 'package:matching_app_framework/service/profile.dart';
+
+import 'dart:async';
+import 'package:http/http.dart' as http;
 
 // class Home extends StatefulWidget {
 class Home extends StatefulWidget {
@@ -33,66 +40,26 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _counter = 0;
-  String _last_name = '';
-  String _first_name = '';
+  String _lastName = '';
+  String _firstName = '';
   String _bio = '';
   ProfileService profileService;
   SwapCard swapCard;
-
-  void _incrementCounter() {
-    setState(() {
-      getTextFromAPi();
-      _counter++;
-    });
-  }
-
-  void getTextFromAPi() {
-    // Sample
-    // var url = Uri.https("reqres.in","api/users", {'page':'2'});
-    // Test
-    // - https://0gviiw91l1.execute-api.us-east-1.amazonaws.com/Prod/hello/
-    // var url = Uri.https("0gviiw91l1.execute-api.us-east-1.amazonaws.com","Prod/hello/");
-    // Profile
-    // - https://0gviiw91l1.execute-api.us-east-1.amazonaws.com/Prod/profile/1
-    var url = Uri.https("0gviiw91l1.execute-api.us-east-1.amazonaws.com","Prod/profile/1");
-    // Profile Image
-    // - https://0gviiw91l1.execute-api.us-east-1.amazonaws.com/Prod/profile/1/images
-    // var url = Uri.https("0gviiw91l1.execute-api.us-east-1.amazonaws.com","Prod/profile/1/images", {});
-    http.get(url).then((response) {
-        print(response.statusCode);
-        print(response.body);
-        Map resJson = json.decode(response.body);
-        print(resJson);
-        // for (var k in resJson.keys) {
-        //   print('key is ' + k + '.');
-        // }
-        // for (var v in resJson.values) {
-        //   print('value is ' + v.toString() + '.');
-        // }
-        resJson.forEach((var k, var v) {
-          print(k + " => " + v.toString());
-          v.forEach((var i, var o) {
-            print(i.toString() + " => " + o.toString());
-          });
-          _last_name = v['last_name'];
-          _first_name = v['first_name'];
-          _bio = v['bio'] + 'なんつってな';
-        });
-    });
-
-  }
+  TinderSwapCard cards;
+  List<Profile> profiles;
+  CardController controller;
+  int swapCount = 0;
 
   @override
   Widget build(BuildContext context) {
 
     this.profileService = new ProfileService();
     this.swapCard = new SwapCard();
-
-    List hoge = this.profileService.getProfileList();
-    // sleep(Duration(seconds: 5));
-    print(sprintf("hoge: %s", [hoge]));
-    // List profileList = profileService.getProfileList();
-    // swapCard.setProfileList(profileList);
+    this._fetchProfilesAwait();
+    this.cards = this._getSwapCard(context, this.profiles);
+    this._lastName = (this.profiles != null) ? this.profiles[0].lastName : "今田";
+    this._firstName = (this.profiles != null) ? this.profiles[0].firstName : "美桜";
+    this._bio = (this.profiles != null) ? this.profiles[0].bio : "BIRTHDAY：1997/3/5\nHEIGHT：157 cm\nSHOES：23.5 cm\n趣味：語学勉強\n特技：福岡弁の早口言葉";
 
     return Scaffold(
       appBar: getAppBar(context, AppLocalizations.of(context).title_home),
@@ -109,27 +76,7 @@ class _HomeState extends State<Home> {
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.width * 0.05,
               ),
-              child: swapCard.getSwapCard(context),
-            ),
-            // Text(
-            //   'カードの下の方だよ'
-            // ),
-            // Text(
-            //   AppLocalizations.of(context).hello("My son"),
-            // ),
-            // Text(
-            //   AppLocalizations.of(context).allow,
-            // ),
-            // Text(
-            //   AppLocalizations.of(context).deny,
-            // ),
-            Text(
-              '$_last_name' + ' ' + '$_first_name',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Text(
-              '' + '$_bio',
-              style: Theme.of(context).textTheme.headline4,
+              child: this.cards,
             ),
             Text(
               '$_counter' + ' LIKE!',
@@ -145,6 +92,102 @@ class _HomeState extends State<Home> {
         tooltip: 'Increment',
         child: Icon(Icons.favorite),
       ),
+    );
+  }
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+      this._fetchProfilesAwait();
+      this.cards = this._getSwapCard(context, this.profiles);
+    });
+  }
+
+  void _fetchProfilesAwait() async {
+    Future<List> _futureOfList = this.profileService.fetchProfiles();
+    this.profiles = await _futureOfList;
+  }
+
+  void _showProfileDetail(Profile profile) {
+    this._lastName = profile.lastName;
+    this._firstName = profile.firstName;
+    this._bio = profile.bio;
+  }
+
+  TinderSwapCard _getSwapCard(BuildContext context, List<Profile> profiles) {
+
+    return new TinderSwapCard(
+      swipeUp: true,
+      swipeDown: true,
+      orientation: AmassOrientation.BOTTOM,
+      totalNum: (profiles != null) ? profiles.length : 1,
+      stackNum: 3,
+      swipeEdge: 4.0,
+      maxWidth: MediaQuery.of(context).size.width,
+      maxHeight: MediaQuery.of(context).size.height,
+      minWidth: MediaQuery.of(context).size.width * 0.8,
+      minHeight: MediaQuery.of(context).size.height * 0.8,
+      cardBuilder: (context, index) => Card(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Image.network((profiles != null) ? profiles[index].imageData : "https://matching-app-fw.s3-ap-northeast-1.amazonaws.com/assets/mio_imada.jpg", fit: BoxFit.cover),
+              ),
+              ListTile(
+                leading: Icon(Icons.access_alarms),
+                title: Text((profiles != null) ? profiles[index].lastName + " " + profiles[index].firstName : "今田 美桜"),
+                subtitle: Text(
+                  (profiles != null) ? profiles[index].bio : "BIRTHDAY：1997/3/5\nHEIGHT：157 cm\nSHOES：23.5 cm\n趣味：語学勉強\n特技：福岡弁の早口言葉",
+                  style:
+                  TextStyle(color: Colors.black.withOpacity(0.6)),
+                ),
+              ),
+            ],
+          ),
+      ),
+      cardController: controller = CardController(),
+      swipeUpdateCallback:
+          (DragUpdateDetails details, Alignment align) {
+        /// Get swiping card's alignment
+        print(details);
+        print(align);
+        print(align.x);
+
+        if (align.x < -5) {
+          print("swipeUpdateCallback - LEFT");
+          //Card is LEFT swiping
+          showLikeDialog(context);
+
+        } else if (align.x > 5) {
+          print("swipeUpdateCallback - RIGHT");
+          //Card is RIGHT swiping
+          showDislikeDialog(context);
+
+        }
+        else if (align.x == 0) {
+          print("swipeUpdateCallback - MIDDLE");
+        }
+      },
+      swipeCompleteCallback:
+          (CardSwipeOrientation orientation, int index) {
+        /// Get orientation & index of swiped card!
+        print("swipeCompleteCallback");
+        print(orientation);
+        print(index);
+        if (orientation == CardSwipeOrientation.RECOVER) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>
+                  ProfilePage(
+                    title: AppLocalizations.of(context).hello("Profile Page"),
+                    profileId: 4,
+                  ),
+              )
+          );
+        }
+      },
     );
   }
 }
