@@ -29,68 +29,107 @@ class ProfilePage extends StatelessWidget {
       home: Scaffold(
         appBar: getAppBar(context, title),
         bottomNavigationBar: getAppBarBottom(context, title),
-        body:
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                height: MediaQuery.of(context).size.height * 0.6,
-                margin: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).size.width * 0.05,
-                ),
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.width * 0.05,
-                ),
-                child:
-                ImageSlideshow(
+        body: Center(
+          child: SingleChildScrollView( // SingleChildScrollViewで子ウィジェットをラップ
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  margin: EdgeInsets.only(
+                    bottom: 15,
+                  ),
+                  padding: EdgeInsets.all(15),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: ImageSlideshow(
 
-                  /// Width of the [ImageSlideshow].
-                  width: double.infinity,
+                      /// Width of the [ImageSlideshow].
+                      width: MediaQuery.of(context).size.width,
 
-                  /// Height of the [ImageSlideshow].
-                  height: 500,
+                      /// Height of the [ImageSlideshow].
+                      height: 500,
 
-                  /// The page to show when first creating the [ImageSlideshow].
-                  initialPage: 0,
+                      /// The page to show when first creating the [ImageSlideshow].
+                      initialPage: 0,
 
-                  /// The color to paint the indicator.
-                  indicatorColor: Colors.blue,
+                      /// The color to paint the indicator.
+                      indicatorColor: Colors.blue,
 
-                  /// The color to paint behind th indicator.
-                  indicatorBackgroundColor: Colors.grey,
+                      /// The color to paint behind th indicator.
+                      indicatorBackgroundColor: Colors.grey,
 
-                  /// The widgets to display in the [ImageSlideshow].
-                  /// Add the sample image file into the images folder
-                  children: [
-                    Image.asset(
-                      "assets/mio_imada.jpg",
-                      fit: BoxFit.cover,
+                      /// The widgets to display in the [ImageSlideshow].
+                      /// Add the sample image file into the images folder
+                      children: [
+                        Image.asset(
+                          "assets/mio_imada1.jpg",
+                          fit: BoxFit.cover,
+                        ),
+                        Image.asset(
+                          "assets/mio_imada2.jpg",
+                          fit: BoxFit.cover,
+                        ),
+                        Image.asset(
+                          "assets/mio_imada3.jpg",
+                          fit: BoxFit.cover,
+                        ),
+                      ],
+
+                      /// Called whenever the page in the center of the viewport changes.
+                      onPageChanged: (value) {
+                        print('Page changed: $value');
+                      },
+
+                      /// Auto scroll interval.
+                      /// Do not auto scroll with null or 0.
+                      autoPlayInterval: 5000,
                     ),
-                    Image.asset(
-                      "assets/mio_imada2.jpg",
-                      fit: BoxFit.cover,
+                  ),
+                ),
+
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 4.0),
+                      padding: EdgeInsets.only(
+                        left:15,
+                        right: 15
+                      ),
+                      child: Text(
+                        "山田 花子　24歳",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20.0),
+                      ),
                     ),
-                    Image.asset(
-                      "assets/mio_imada.jpg",
-                      fit: BoxFit.cover,
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 30.0),
+                      padding: EdgeInsets.only(
+                        left:15,
+                        right: 15
+                      ),
+                      child: Text(
+                        "大阪市（ここから5km）",
+                        style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 30.0),
+                      padding: EdgeInsets.only(left:15, right: 15),
+                      child: Text(
+                        "恥の多い生涯を送って来ました。自分には、人間の生活というものが、見当つかないのです。自分は東北の田舎に生れましたので、汽車をはじめて見たのは、よほど大きくなってからでした。",
+                        style: TextStyle(fontSize: 14.0),
+                      ),
                     ),
                   ],
-
-                  /// Called whenever the page in the center of the viewport changes.
-                  onPageChanged: (value) {
-                    print('Page changed: $value');
-                  },
-
-                  /// Auto scroll interval.
-                  /// Do not auto scroll with null or 0.
-                  autoPlayInterval: 5000,
                 ),
-              ),
-              SizedBox(
-                width: 230,
-                height: 70,
-                child: ElevatedButton(
+
+                SizedBox(
+                  width: 230,
+                  height: 70,
+                  child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop(false);
                     },
@@ -104,9 +143,10 @@ class ProfilePage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       onPrimary: Colors.black, //押したときの色！！
                     ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
