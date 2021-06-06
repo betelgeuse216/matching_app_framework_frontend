@@ -123,10 +123,10 @@ class _HomeState extends State<Home> {
       totalNum: (profiles != null) ? profiles.length : 1,
       stackNum: 3,
       swipeEdge: 4.0,
-      maxWidth: MediaQuery.of(context).size.width,
-      maxHeight: MediaQuery.of(context).size.height,
-      minWidth: MediaQuery.of(context).size.width * 0.8,
-      minHeight: MediaQuery.of(context).size.height * 0.8,
+      maxWidth: MediaQuery.of(context).size.width * 0.9,
+      maxHeight: MediaQuery.of(context).size.height * 0.9,
+      minWidth: MediaQuery.of(context).size.width * 0.6,
+      minHeight: MediaQuery.of(context).size.height * 0.6,
       cardBuilder: (context, index) => Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -139,7 +139,7 @@ class _HomeState extends State<Home> {
                 leading: Icon(Icons.access_alarms),
                 title: Text((profiles != null) ? profiles[index].lastName + " " + profiles[index].firstName : "今田 美桜"),
                 subtitle: Text(
-                  (profiles != null) ? profiles[index].bio : "BIRTHDAY：1997/3/5\nHEIGHT：157 cm\nSHOES：23.5 cm\n趣味：語学勉強\n特技：福岡弁の早口言葉",
+                  (profiles != null) ? profiles[index].bio : "LOADING...",
                   style:
                   TextStyle(color: Colors.black.withOpacity(0.6)),
                 ),
