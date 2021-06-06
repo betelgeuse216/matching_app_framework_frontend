@@ -15,7 +15,8 @@ import 'dart:convert' show json;
 
 class ProfileService {
 
-  String apiDomain = "0gviiw91l1.execute-api.us-east-1.amazonaws.com";
+  //https://cmox3c0jke.execute-api.ap-northeast-2.amazonaws.com/Prod/profile
+  String apiDomain = "cmox3c0jke.execute-api.ap-northeast-2.amazonaws.com";
   String apiPathPofileList = "Prod/profile";
   String apiPathProfileOne = "Prod/profile/%s";
 
@@ -44,7 +45,7 @@ class ProfileService {
       var profilesJson = decodedJson['profiles'];
       // print(profilesJson);
       // Map<String, dynamic> decodedJson = json.decode(response.body);
-      print(profilesJson[0]['last_name']);
+      // print(profilesJson[0]['last_name']);
       int i = 0;
       profilesJson.forEach((dynamic p){
         for(var profileJson in profilesJson){
@@ -52,7 +53,7 @@ class ProfileService {
           profileJson['image_data'] = 'https://d1t742d15gmb5g.cloudfront.net/assets/mio_imada' + i.toString() + '.jpg';
           Profile p = Profile.fromJson(profileJson);
           profiles.add(p);
-          print(profileJson['last_name'] + "さんは、" + p.firstName + "さんです。");
+          // print(profileJson['last_name'] + "さんは、" + p.firstName + "さんです。");
         }
       });
       return profiles;
@@ -79,7 +80,7 @@ class ProfileService {
   List getProfileList() {
 
     // Profile List
-    // https://0gviiw91l1.execute-api.us-east-1.amazonaws.com/Prod/profile
+    // https://cmox3c0jke.execute-api.ap-northeast-2.amazonaws.com/Prod/profile
     var url = Uri.https(apiDomain, apiPathPofileList);
 
     http.get(url).then((response) {
@@ -116,8 +117,8 @@ class ProfileService {
 
   List<String> getProfileImageListFirst() {
     // Profile List
-    // https://0gviiw91l1.execute-api.us-east-1.amazonaws.com/Prod/profile
-    var url = Uri.https("0gviiw91l1.execute-api.us-east-1.amazonaws.com","Prod/profile");
+    // https://cmox3c0jke.execute-api.ap-northeast-2.amazonaws.com/Prod/profile
+    var url = Uri.https("cmox3c0jke.execute-api.ap-northeast-2.amazonaws.com","Prod/profile");
 
     http.get(url).then((response) {
       // print(response.statusCode);
@@ -148,7 +149,7 @@ class ProfileService {
     Map profile = {};
 
     // Profile
-    // - https://0gviiw91l1.execute-api.us-east-1.amazonaws.com/Prod/profile/1
+    // - https://cmox3c0jke.execute-api.ap-northeast-2.amazonaws.com/Prod/profile/1
     var url = Uri.https(apiDomain, sprintf(apiPathProfileOne, [profileId.toString()]));
 
     http.get(url).then((response) {
@@ -182,8 +183,8 @@ class ProfileService {
     Map profileImages = {};
 
     // Profile Image
-    // - https://0gviiw91l1.execute-api.us-east-1.amazonaws.com/Prod/profile/1/images
-    var url = Uri.https("0gviiw91l1.execute-api.us-east-1.amazonaws.com","Prod/profile/" + profileId.toString() +  "/images", {});
+    // - https://cmox3c0jke.execute-api.ap-northeast-2.amazonaws.com/Prod/profile/1/images
+    var url = Uri.https("cmox3c0jke.execute-api.ap-northeast-2.amazonaws.com","Prod/profile/" + profileId.toString() +  "/images", {});
 
     http.get(url).then((response) {
       print(response.statusCode);
