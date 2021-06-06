@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:matching_app_framework/model/profileImage.dart';
 import 'package:sprintf/sprintf.dart';
 
 import 'dart:io';
@@ -57,8 +58,8 @@ class _HomeState extends State<Home> {
     this.swapCard = new SwapCard();
     this._fetchProfilesAwait();
     this.cards = this._getSwapCard(context, this.profiles);
-    this._lastName = (this.profiles != null) ? this.profiles[0].lastName : "今田";
-    this._firstName = (this.profiles != null) ? this.profiles[0].firstName : "美桜";
+    this._lastName = (this.profiles != null) ? this.profiles[0].lastName : "_今田";
+    this._firstName = (this.profiles != null) ? this.profiles[0].firstName : "_美桜";
     this._bio = (this.profiles != null) ? this.profiles[0].bio : "BIRTHDAY：1997/3/5\nHEIGHT：157 cm\nSHOES：23.5 cm\n趣味：語学勉強\n特技：福岡弁の早口言葉";
 
     return Scaffold(
@@ -151,9 +152,9 @@ class _HomeState extends State<Home> {
       swipeUpdateCallback:
           (DragUpdateDetails details, Alignment align) {
         /// Get swiping card's alignment
-        print(details);
-        print(align);
-        print(align.x);
+        // print(details);
+        // print(align);
+        // print(align.x);
 
         if (align.x < -5) {
           print("swipeUpdateCallback - LEFT");
@@ -176,13 +177,18 @@ class _HomeState extends State<Home> {
         print("swipeCompleteCallback");
         print(orientation);
         print(index);
+        print("=================");
+
         if (orientation == CardSwipeOrientation.RECOVER) {
           Navigator.push(
               context,
               MaterialPageRoute(builder: (context) =>
                   ProfilePage(
                     title: AppLocalizations.of(context).hello("Profile Page"),
-                    profileId: 4,
+                    profileId: 1,
+                    profile: this.profiles[0],
+                    profileService: this.profileService,
+                    // imageList: this.profileImages,
                   ),
               )
           );
