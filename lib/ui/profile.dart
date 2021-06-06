@@ -15,28 +15,27 @@ import 'package:matching_app_framework/ui/parts/appbar.dart';
 import 'package:matching_app_framework/ui/parts/appbar_bottom.dart';
 import 'package:sprintf/sprintf.dart';
 
-// class Home extends StatefulWidget {
-// class ProfilePage extends StatefulWidget {
-//   ProfilePage({Key key, this.title, this.profileId, this.profile, this.profileService}) : super(key: key);
-//
-//   final String title;
-//   final int profileId;
-//   final Profile profile;
-//   final ProfileService profileService;
-//
-//   @override
-//   _ProfileState createState() => _ProfileState();
-// }
-//
-// class _ProfileState extends State<ProfilePage> {
-class ProfilePage extends StatelessWidget {
-
+class ProfilePage extends StatefulWidget {
   ProfilePage({Key key, this.title, this.profileId, this.profile, this.profileService}) : super(key: key);
 
   final String title;
   final int profileId;
   final Profile profile;
   final ProfileService profileService;
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+// class ProfilePage extends StatelessWidget {
+
+  // ProfilePage({Key key, this.title, this.profileId, this.profile, this.profileService}) : super(key: key);
+
+  // final String title;
+  // final int profileId;
+  // final Profile profile;
+  // final ProfileService profileService;
   // int profileId;
   List<ProfileImage> profileImages;
   List<Image> slideImages;
@@ -44,7 +43,7 @@ class ProfilePage extends StatelessWidget {
   String hogehoge = 'GET!';
 
   void _fetchProfileImagesAwait(int profileId) async {
-    Future<List<ProfileImage>> _futureOfList = this.profileService.getProfileImages(profileId);
+    Future<List<ProfileImage>> _futureOfList = widget.profileService.getProfileImages(profileId);
     this.profileImages = await _futureOfList;
   }
 
@@ -130,26 +129,34 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
+  void updateImageSlide() {
+    setState(() {
+      this.imgSlide = this._getImageSlideShow();
+      print(this.imgSlide);
+      this.hogehoge += '!';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
 
     //get profile images
     print("--- ABC Open Profile Page");
-    print(this.profileId);
-    print(this.profile.lastName);
-    print(this.profile.firstName);
-    print(this.profile.imageData);
+    print(widget.profileId);
+    print(widget.profileId);
+    print(widget.profile.lastName);
+    print(widget.profile.firstName);
+    print(widget.profile.imageData);
     // print(this.imageList);
     // imageList.forEach((image) {
     //   print(image.imageUrl);
     // });
-    this._fetchProfileImagesAwait(this.profileId);
+    this._fetchProfileImagesAwait(widget.profileId);
     // print(this.profileImages);
     if (this.profileImages != null) {
       print(this.profileImages.length);
     }
-    this.imgSlide = this._getImageSlideShow();
+    updateImageSlide();
     print("--- XYZ - Open Profile Page");
 
     return MaterialApp(
@@ -157,8 +164,8 @@ class ProfilePage extends StatelessWidget {
         primaryColor: Colors.white,
       ),
       home: Scaffold(
-        appBar: getAppBar(context, title),
-        bottomNavigationBar: getAppBarBottom(context, title),
+        appBar: getAppBar(context, widget.title),
+        bottomNavigationBar: getAppBarBottom(context, widget.title),
         body:
         Center(
           child: Column(
@@ -173,6 +180,14 @@ class ProfilePage extends StatelessWidget {
                   top: MediaQuery.of(context).size.width * 0.05,
                 ),
                 child: this.imgSlide,
+              ),
+              Text(
+                widget.profile.lastName + " " + widget.profile.firstName,
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Text(
+                widget.profile.bio,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
               SizedBox(
                 width: 230,
@@ -198,9 +213,7 @@ class ProfilePage extends StatelessWidget {
                 height: 70,
                 child: ElevatedButton(
                   onPressed: () {
-                    this.imgSlide = this._getImageSlideShow();
-                    print(this.imgSlide);
-                    this.hogehoge += 'hoge';
+                    this.updateImageSlide();
                   },
                   child: Text(
                     this.hogehoge,
