@@ -69,7 +69,7 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.height * 0.85,
+              height: MediaQuery.of(context).size.height * 0.75,
               // margin: EdgeInsets.only(
               //   bottom: MediaQuery.of(context).size.width * 0.05,
               // ),
