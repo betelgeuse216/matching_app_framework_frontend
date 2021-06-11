@@ -225,7 +225,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ),
-
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[

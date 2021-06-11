@@ -24,6 +24,7 @@ import 'package:matching_app_framework/ui/parts/appbar_bottom.dart';
 import 'package:matching_app_framework/ui/parts/swap_card.dart';
 import 'package:matching_app_framework/ui/parts/dialog.dart';
 import 'package:matching_app_framework/ui/profile.dart';
+import 'package:matching_app_framework/ui/setting.dart';
 import 'package:matching_app_framework/service/profile.dart';
 
 import 'dart:async';
@@ -223,17 +224,22 @@ class _HomeState extends State<Home> {
         print("=================");
 
         if (orientation == CardSwipeOrientation.RECOVER) {
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(builder: (context) => SettingPage(title: "設定"),
+          //     )
+          // );
           Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) =>
-                  ProfilePage(
-                    title: AppLocalizations.of(context).hello("Profile Page"),
-                    profileId: 1,
-                    profile: this.profiles[0],
-                    profileService: this.profileService,
-                    // imageList: this.profileImages,
-                  ),
-              )
+            context,
+            MaterialPageRoute(builder: (context) =>
+                ProfilePage(
+                  title: AppLocalizations.of(context).hello("Profile Page"),
+                  profileId: 1,
+                  profile: this.profiles[0],
+                  profileService: this.profileService,
+                  // imageList: this.profileImages,
+                ),
+            )
           );
         }
       },
