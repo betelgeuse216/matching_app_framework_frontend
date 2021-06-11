@@ -7,7 +7,8 @@ import 'package:adobe_xd/page_link.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:matching_app_framework/ui/login.dart';
-import 'package:matching_app_framework/ui/profile.dart';
+import 'package:matching_app_framework/ui/setting.dart';
+import 'package:matching_app_framework/ui/account.dart';
 
 AppBar getAppBar(BuildContext context, text) {
   return AppBar(
@@ -54,7 +55,7 @@ AppBar getAppBar(BuildContext context, text) {
       onPressed: (){
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ProfilePage(title: AppLocalizations.of(context).hello("ぴーくん")),
+            MaterialPageRoute(builder: (context) => SettingPage(title: "設定"),
             )
         );
       },
@@ -67,7 +68,7 @@ AppBar getAppBar(BuildContext context, text) {
         onPressed: (){
           Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProfilePage(title: AppLocalizations.of(context).hello("kazutxt")),
+              MaterialPageRoute(builder: (context) => AccountPage(title: "アカウント情報"),
               )
           );
         },

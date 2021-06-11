@@ -43,6 +43,7 @@ dependencies:
   intl: ^0.17.0 # 多言語やフォーマッタなどの関連ライブラリ
   sprintf: ^6.0.0
   flutter_image_slideshow: ^0.1.0
+  flutter_slidable: ^0.6.0 # ListTileを横にスライドさせることができるライブラリ
 
 dev_dependencies:
   flutter_test:
@@ -58,7 +59,9 @@ flutter:
 
   assets:
     - assets/mio_imada.jpg
+    - assets/mio_imada1.jpg
     - assets/mio_imada2.jpg
+    - assets/mio_imada3.jpg
     - assets/logo.jpg
     - assets/logo.png
 
