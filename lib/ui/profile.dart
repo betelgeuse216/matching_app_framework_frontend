@@ -174,6 +174,44 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
+              SizedBox(
+                width: 230,
+                height: 30,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  },
+                  child: Text(
+                    'CLOSE',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    onPrimary: Colors.black, //押したときの色！！
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 230,
+                height: 30,
+                child: ElevatedButton(
+                  onPressed: () {
+                    this.updateImageSlide();
+                  },
+                  child: Text(
+                    this.hogehoge,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    onPrimary: Colors.black, //押したときの色！！
+                  ),
+                ),
+              ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.6,
                 margin: EdgeInsets.only(
@@ -191,44 +229,6 @@ class _ProfilePageState extends State<ProfilePage> {
               Text(
                 widget.profile.bio,
                 style: Theme.of(context).textTheme.bodyText1,
-              ),
-              SizedBox(
-                width: 230,
-                height: 70,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(false);
-                  },
-                  child: Text(
-                    'CLOSE',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    onPrimary: Colors.black, //押したときの色！！
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 230,
-                height: 70,
-                child: ElevatedButton(
-                  onPressed: () {
-                    this.updateImageSlide();
-                  },
-                  child: Text(
-                    this.hogehoge,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    onPrimary: Colors.black, //押したときの色！！
-                  ),
-                ),
               ),
             ],
           ),
