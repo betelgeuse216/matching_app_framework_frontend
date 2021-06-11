@@ -164,7 +164,10 @@ class _ProfilePageState extends State<ProfilePage> {
         primaryColor: Colors.white,
       ),
       home: Scaffold(
-        appBar: getAppBar(context, widget.title),
+        // appBar: getAppBar(context, widget.title),
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
         bottomNavigationBar: getAppBarBottom(context, widget.title),
         body:
         Center(
