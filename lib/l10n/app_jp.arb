@@ -6,7 +6,17 @@
   "title_profile": "プロフィール",
   "title_profile_photo": "写真",
   "hello": "ようこそ {name}",
+  "@hello": {
+      "description": "welcome message",
+      "placeholders":{
+      "name":{
+        "description" : "username",
+        "example" : "kazutxt"
+      }
+    }
+  },
   "login": "ログイン",
   "info": "情報",
   "allow": "許可"
+  "deny": "あかん"
 }
