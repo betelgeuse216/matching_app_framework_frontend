@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:matching_app_framework/ui/chatlist.dart';
 
 import 'package:adobe_xd/pinned.dart';
 import 'package:adobe_xd/page_link.dart';
@@ -55,7 +56,13 @@ BottomAppBar getAppBarBottom(BuildContext context, text) {
               allowDrawingOutsideViewBox: true,
               fit: BoxFit.fill,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ChatListPage(title: AppLocalizations.of(context).hello("Chat List")),
+                  )
+              );
+            },
           ),
           IconButton(
             icon: SvgPicture.string(
