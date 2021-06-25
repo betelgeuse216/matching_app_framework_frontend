@@ -66,31 +66,24 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: getAppBar(context, AppLocalizations.of(context).title_home),
       bottomNavigationBar: getAppBarBottom(context, widget.title),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.height * 0.75,
-              // margin: EdgeInsets.only(
-              //   bottom: MediaQuery.of(context).size.width * 0.05,
-              // ),
-              // padding: EdgeInsets.only(
-              //   top: MediaQuery.of(context).size.width * 0.05,
-              // ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
               child: this.cards,
             ),
-            // Text(
-            //   '$_counter' + ' LIKE!',
-            //   style: Theme.of(context).textTheme.headline4,
-            // ),
-          ],
-        ),
+          ),
+          // Text(
+          //   '$_counter' + ' LIKE!',
+          //   style: Theme.of(context).textTheme.headline4,
+          // ),
+        ],
       ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(
-        margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.15),
+        margin: EdgeInsets.only(bottom: 100.0),
         child: FloatingActionButton(
           onPressed: _incrementCounter,
           tooltip: 'Increment',
@@ -147,19 +140,22 @@ class _HomeState extends State<Home> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Ink.image(
-              image: NetworkImage(
-                'https://matching-app-fw.s3-ap-northeast-1.amazonaws.com/assets/mio_imada.jpg',
-              ),
-              height: MediaQuery.of(context).size.height * 0.75,
-              fit: BoxFit.cover,
-            ),
+
             // ClipRRect(
             //   borderRadius: BorderRadius.circular(15.0),
             //   child: Image.network((profiles != null) ? profiles[index].imageData : "https://matching-app-fw.s3-ap-northeast-1.amazonaws.com/assets/mio_imada.jpg", fit: BoxFit.cover),
             // ),
+            Expanded(
+              flex: 1,
+              child: Ink.image(
+                image: NetworkImage(
+                  'https://matching-app-fw.s3-ap-northeast-1.amazonaws.com/assets/mio_imada3.jpg',
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
             Padding(
-              padding: EdgeInsets.all(20).copyWith(bottom: 0),
+              padding: EdgeInsets.all(20),
               child: RichText(
                 text: TextSpan(
                   text: (profiles != null) ? profiles[index].lastName + " " + profiles[index].firstName : "今田 美桜",
