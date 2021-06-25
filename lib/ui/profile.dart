@@ -164,8 +164,8 @@ class _ProfilePageState extends State<ProfilePage> {
         primaryColor: Colors.white,
       ),
       home: Scaffold(
-        appBar: getAppBar(context, title),
-        bottomNavigationBar: getAppBarBottom(context, title),
+        appBar: getAppBar(context, "__title__"), //@FIXME Set Title.
+        bottomNavigationBar: getAppBarBottom(context, "__title__"), //@FIXME Set Title.
         body: Center(
           child: SingleChildScrollView( // SingleChildScrollViewで子ウィジェットをラップ
             child: Column(
