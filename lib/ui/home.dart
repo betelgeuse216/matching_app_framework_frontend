@@ -66,33 +66,29 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: getAppBar(context, AppLocalizations.of(context).title_home),
       bottomNavigationBar: getAppBarBottom(context, widget.title),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.height * 0.6,
-              margin: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.width * 0.05,
-              ),
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.width * 0.05,
-              ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
               child: this.cards,
             ),
-            Text(
-              '$_counter' + ' LIKE!',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+          ),
+          // Text(
+          //   '$_counter' + ' LIKE!',
+          //   style: Theme.of(context).textTheme.headline4,
+          // ),
+        ],
       ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.favorite),
+      floatingActionButton: Container(
+        margin: EdgeInsets.only(bottom: 100.0),
+        child: FloatingActionButton(
+          onPressed: _incrementCounter,
+          tooltip: 'Increment',
+          child: Icon(Icons.favorite),
+        ),
       ),
     );
   }
@@ -130,25 +126,68 @@ class _HomeState extends State<Home> {
       minWidth: MediaQuery.of(context).size.width * 0.6,
       minHeight: MediaQuery.of(context).size.height * 0.6,
       cardBuilder: (context, index) => Card(
+        shadowColor: Colors.grey.withOpacity(0.5),
+        elevation: 8,
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          // side: BorderSide(
+          //   color: Colors.grey.withOpacity(0.5),
+          //   width: 1,
+          // ),
+        ),
         child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15.0),
-                child: Image.network((profiles != null) ? profiles[index].imageData : "https://matching-app-fw.s3-ap-northeast-1.amazonaws.com/assets/mio_imada.jpg", fit: BoxFit.cover),
+          children: [
+
+            // ClipRRect(
+            //   borderRadius: BorderRadius.circular(15.0),
+            //   child: Image.network((profiles != null) ? profiles[index].imageData : "https://matching-app-fw.s3-ap-northeast-1.amazonaws.com/assets/mio_imada.jpg", fit: BoxFit.cover),
+            // ),
+            Expanded(
+              flex: 1,
+              child: Ink.image(
+                image: NetworkImage(
+                  'https://matching-app-fw.s3-ap-northeast-1.amazonaws.com/assets/mio_imada3.jpg',
+                ),
+                fit: BoxFit.cover,
               ),
-              ListTile(
-                leading: Icon(Icons.access_alarms),
-                title: Text((profiles != null) ? profiles[index].lastName + " " + profiles[index].firstName : "今田 美桜"),
-                subtitle: Text(
-                  (profiles != null) ? profiles[index].bio : "LOADING...",
-                  style:
-                  TextStyle(color: Colors.black.withOpacity(0.6)),
+            ),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: RichText(
+                text: TextSpan(
+                  text: (profiles != null) ? profiles[index].lastName + " " + profiles[index].firstName : "今田 美桜",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '　24歳 / 大阪市（ここから5km）',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    )
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+            // ListTile(
+            //   leading: Icon(Icons.access_alarms),
+            //   title: Text((profiles != null) ? profiles[index].lastName + " " + profiles[index].firstName : "今田 美桜"),
+            //   subtitle: Text(
+            //     (profiles != null) ? profiles[index].bio : "BIRTHDAY：1997/3/5\nHEIGHT：157 cm\nSHOES：23.5 cm\n趣味：語学勉強\n特技：福岡弁の早口言葉",
+            //     style:
+            //     TextStyle(color: Colors.black.withOpacity(0.6)),
+            //   ),
+            // ),
+          ],
+        ),
       ),
+      
       cardController: controller = CardController(),
       swipeUpdateCallback:
           (DragUpdateDetails details, Alignment align) {
