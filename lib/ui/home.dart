@@ -123,8 +123,8 @@ class _HomeState extends State<Home> {
       swipeEdge: 4.0,
       maxWidth: MediaQuery.of(context).size.width * 0.9,
       maxHeight: MediaQuery.of(context).size.height * 0.9,
-      minWidth: MediaQuery.of(context).size.width * 0.6,
-      minHeight: MediaQuery.of(context).size.height * 0.6,
+      minWidth: MediaQuery.of(context).size.width * 0.89,
+      minHeight: MediaQuery.of(context).size.height * 0.89,
       cardBuilder: (context, index) => Card(
         shadowColor: Colors.grey.withOpacity(0.5),
         elevation: 8,
