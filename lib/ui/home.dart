@@ -155,19 +155,20 @@ class _HomeState extends State<Home> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(24),
               child: RichText(
                 text: TextSpan(
                   text: (profiles != null) ? profiles[index].lastName + " " + profiles[index].firstName : "今田 美桜",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                   children: <TextSpan>[
                     TextSpan(
                       text: '　24歳 / 大阪市（ここから5km）',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 12,
                         fontWeight: FontWeight.normal,
                       ),
                     )
