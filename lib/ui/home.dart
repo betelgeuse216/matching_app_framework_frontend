@@ -200,12 +200,12 @@ class _HomeState extends State<Home> {
         if (align.x < -5) {
           print("swipeUpdateCallback - LEFT");
           //Card is LEFT swiping
-          showLikeDialog(context);
+          showDislikeDialog(context);
 
         } else if (align.x > 5) {
           print("swipeUpdateCallback - RIGHT");
           //Card is RIGHT swiping
-          showDislikeDialog(context);
+          showLikeDialog(context);
 
         }
         else if (align.x == 0) {
