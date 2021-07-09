@@ -54,6 +54,7 @@ class _HomeState extends State<Home> {
   List<Profile> profiles;
   CardController controller;
   int swapCount = 0;
+  bool isShowExplainLikeDislike = true;
 
   @override
   Widget build(BuildContext context) {
@@ -80,8 +81,8 @@ class _HomeState extends State<Home> {
                 ),
               ),
           ]),
-          this.showExplainDislike(true),
-          this.showExplainLike(true),
+          this._showExplainDislike(true),
+          this._showExplainLike(true),
       ]),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -205,6 +206,7 @@ class _HomeState extends State<Home> {
           //Card is LEFT swiping
           showDislikeDialog(context);
 
+
         } else if (align.x > 5) {
           print("swipeUpdateCallback - RIGHT");
           //Card is RIGHT swiping
@@ -214,6 +216,10 @@ class _HomeState extends State<Home> {
         else if (align.x == 0) {
           print("swipeUpdateCallback - MIDDLE");
         }
+        setState(() {
+          this.isShowExplainLikeDislike = false;
+        });
+
       },
       swipeCompleteCallback:
           (CardSwipeOrientation orientation, int index) {
@@ -246,7 +252,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Container showExplainDislike(bool isShow) {
+  Container _showExplainDislike(bool isShow) {
     if (!isShow) {
       return Container();
     }
@@ -328,7 +334,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Align showExplainLike(bool isShow) {
+  Align _showExplainLike(bool isShow) {
     if (!isShow) {
       return Align();
     }
