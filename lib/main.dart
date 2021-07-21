@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:matching_app_framework/const/theme.dart';
 import 'package:matching_app_framework/ui/home.dart';
+import 'package:matching_app_framework/ui/base.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       ],
       title: 'Flutter Demo',
       theme: getThemeData(),
-      home: Home(title: 'Matching App Framework'),
+      // home: Home(title: 'Matching App Framework'),
+      home: BasePage(),
       locale: Locale('en'),
     );
   }
