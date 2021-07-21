@@ -18,9 +18,9 @@ class _BasePageState extends State<BasePage> {
 
   static List<Widget> _pageList = [
     Home(title: 'Home 0'),
-    CustomPage(pannelColor: Colors.green, title: 'Settings'),
+    CustomPage(pannelColor: Colors.green, title: 'お気に入り'),
     ChatListPage(title: 'Chat List 3'),
-    CustomPage(pannelColor: Colors.pink, title: 'Search'),
+    CustomPage(pannelColor: Colors.pink, title: 'プロフィール'),
   ];
 
   void _onPageChanged(int index) {
