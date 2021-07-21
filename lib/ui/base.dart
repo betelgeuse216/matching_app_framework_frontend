@@ -17,11 +17,10 @@ class _BasePageState extends State<BasePage> {
   PageController _pageController;
 
   static List<Widget> _pageList = [
-    // CustomPage(pannelColor: Colors.cyan, title: 'Base'),
     Home(title: 'Home 0'),
     CustomPage(pannelColor: Colors.green, title: 'Settings'),
-    CustomPage(pannelColor: Colors.pink, title: 'Search'),
     ChatListPage(title: 'Chat List 3'),
+    CustomPage(pannelColor: Colors.pink, title: 'Search'),
   ];
 
   void _onPageChanged(int index) {

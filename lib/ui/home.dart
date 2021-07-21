@@ -69,9 +69,6 @@ class _HomeState extends State<Home> {
     this._bio = (this.profiles != null) ? this.profiles[0].bio : "BIRTHDAY：1997/3/5\nHEIGHT：157 cm\nSHOES：23.5 cm\n趣味：語学勉強\n特技：福岡弁の早口言葉";
 
     return Scaffold(
-      appBar: getAppBar(context, AppLocalizations.of(context).title_home),
-      // bottomNavigationBar: getAppBarBottom(context, widget.title),
-      bottomNavigationBar: getBottomNavigationBar(context, "__title__"), //@FIXME Set Title.
       body: new Stack(
         children: <Widget>[
           Column(

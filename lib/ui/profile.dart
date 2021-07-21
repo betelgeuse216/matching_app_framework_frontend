@@ -166,10 +166,6 @@ class _ProfilePageState extends State<ProfilePage> {
         primaryColor: Colors.white,
       ),
       home: Scaffold(
-        appBar: getAppBar(context, "__title__"), //@FIXME Set Title.
-        // bottomNavigationBar: getAppBarBottom(context, "__title__"), //@FIXME Set Title.
-        bottomNavigationBar: getBottomNavigationBar(context, "__title__"), //@FIXME Set Title.
-
         body: new Stack(
           children: <Widget>[
           // Image.asset(
