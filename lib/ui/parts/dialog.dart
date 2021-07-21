@@ -9,7 +9,7 @@ Future<void> showLikeDialog(BuildContext context) async {
     barrierDismissible: true, // user must tap button!
     builder: (BuildContext context) {
       return SimpleDialog(
-        title: Text('DISLIKE'),
+        title: Text('LIKE!'),
         children: <Widget>[
         ],
       );
@@ -23,7 +23,7 @@ Future<void> showDislikeDialog(BuildContext context) async {
     barrierDismissible: true, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('LIKE!'),
+        title: Text('DISLIKE...'),
         actions: <Widget>[
         ],
       );
