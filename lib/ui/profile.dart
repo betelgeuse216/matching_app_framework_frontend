@@ -189,7 +189,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.5,
+                    height: MediaQuery.of(context).size.height * 0.6,
                     margin: EdgeInsets.only(
                       bottom: 15,
                     ),
@@ -248,20 +248,44 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         margin: const EdgeInsets.only(bottom: 4.0),
                         padding: EdgeInsets.only(
-                          left:15,
-                          right: 15
+                          left: 30,
+                          right: 30
                         ),
-                        child: Text(
-                          "山田 花子　24歳",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20.0),
+                        child: Row(
+                          children: <Widget>[
+                            Container(
+                              margin: const EdgeInsets.only(right: 15.0),
+                              child: Text(
+                                "山田 花子　24歳",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0
+                                ),
+                              ),
+                            ),
+                            Icon(  // 2.2列目
+                              Icons.circle,
+                              size: 18.0,
+                              color: Color(0xff6AFC9D),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(left: 5.0),
+                              // padding: EdgeInsets.only(top: 5),
+                              child: Text(
+                                "10分前にオンライン",
+                                style: TextStyle(
+                                    fontSize: 12.0
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(bottom: 30.0),
+                        margin: const EdgeInsets.only(bottom: 25.0),
                         padding: EdgeInsets.only(
-                          left:15,
-                          right: 15
+                          left: 30,
+                          right: 30
                         ),
                         child: Text(
                           "大阪市（ここから5km）",
@@ -269,19 +293,78 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(bottom: 30.0),
-                        padding: EdgeInsets.only(left:15, right: 15),
+                        padding: EdgeInsets.only(left: 30, right: 30),
                         child: Text(
                           "恥の多い生涯を送って来ました。自分には、人間の生活というものが、見当つかないのです。自分は東北の田舎に生れましたので、汽車をはじめて見たのは、よほど大きくなってからでした。",
                           style: TextStyle(fontSize: 14.0),
                         ),
                       ),
+                      const Divider(  // 区切り線
+                        height: 50,
+                        thickness: 1,
+                        indent: 30,
+                        endIndent: 30,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 5.0),
+                        padding: EdgeInsets.only(left: 30, right: 30),
+                        child: Text(
+                          "趣味など",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.0
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(left: 30, right: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(
+                              child: Wrap(
+                                alignment: WrapAlignment.start,
+                                spacing: 10.0,
+                                runSpacing: 0.0,
+                                direction: Axis.horizontal,
+                                children: <Widget>[
+                                  Chip(
+                                    label: const Text('お酒'),
+                                  ),
+                                  Chip(
+                                    label: const Text('カフェ'),
+                                  ),
+                                  Chip(
+                                    label: const Text('スイーツ'),
+                                  ),
+                                  Chip(
+                                    label: const Text('旅行'),
+                                  ),
+                                  Chip(
+                                    label: const Text('映画'),
+                                  ),
+                                  Chip(
+                                    label: const Text('ライブ'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
+                  ),
+                  const Divider(  // 区切り線
+                    height: 50,
+                    thickness: 1,
+                    indent: 30,
+                    endIndent: 30,
                   ),
 
                   SizedBox(
-                    width: 230,
-                    height: 70,
+                    width: 200,
+                    height: 40,
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pop(false);
@@ -290,13 +373,18 @@ class _ProfilePageState extends State<ProfilePage> {
                         'CLOSE',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 30,
+                          fontSize: 14,
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
                         onPrimary: Colors.black, //押したときの色！！
                       ),
                     ),
+                  ),
+
+                  SizedBox(
+                    height: 50,
+                    width: 100,
                   ),
                 ],
               ),
