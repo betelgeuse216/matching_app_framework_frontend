@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
             children: <Widget>[
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.only(top: 50, right: 16, bottom: 16, left: 16),
                   child: this.cards,
                 ),
               ),
