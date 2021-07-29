@@ -1,14 +1,14 @@
+import "dart:async";
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:adobe_xd/pinned.dart';
-import 'dart:async';
 
 import 'package:matching_app_framework/model/profile.dart';
 import 'package:matching_app_framework/service/profile.dart';
-import 'package:matching_app_framework/ui/parts/dialog.dart';
 import 'package:matching_app_framework/ui/parts/swap_card.dart';
 import 'package:matching_app_framework/ui/profile.dart';
 
@@ -34,6 +34,8 @@ class _HomeState extends State<Home> {
   CardController controller;
   int swapCount = 0;
   bool isShowExplainLikeDislike = true;
+  bool isShowSparkDislike = false;
+  bool isShowSparklike = false;
   int _selectedIndex = 0;
 
   @override
@@ -61,17 +63,9 @@ class _HomeState extends State<Home> {
           ]),
           this._showExplainDislike(this.isShowExplainLikeDislike),
           this._showExplainLike(this.isShowExplainLikeDislike),
+          this._showSparkDislike(this.isShowSparkDislike),
+          this._showSparkLike(this.isShowSparklike),
       ]),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Container(
-        margin: EdgeInsets.only(bottom: 100.0),
-        child: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: Icon(Icons.favorite),
-        ),
-      ),
     );
   }
 
@@ -153,12 +147,24 @@ class _HomeState extends State<Home> {
         if (align.x < -5) {
           print("swipeUpdateCallback - LEFT");
           //Card is LEFT swiping
-          showDislikeDialog(context);
+          // showDislikeDialog(context);
+
+          setState(() {
+            this.isShowSparkDislike = true;
+          });
+
+          sleep(Duration(milliseconds: 600)); //@FIXME unsupported method, need change animation
 
         } else if (align.x > 5) {
           print("swipeUpdateCallback - RIGHT");
           //Card is RIGHT swiping
-          showLikeDialog(context);
+          // showLikeDialog(context);
+
+          setState(() {
+            this.isShowSparklike = true;
+          });
+
+          sleep(Duration(milliseconds: 600)); //@FIXME unsupported method, need change animation
 
         }
         else if (align.x == 0) {
@@ -166,6 +172,8 @@ class _HomeState extends State<Home> {
         }
         setState(() {
           this.isShowExplainLikeDislike = false;
+          this.isShowSparkDislike = false;
+          this.isShowSparklike = false;
         });
 
       },
@@ -176,6 +184,11 @@ class _HomeState extends State<Home> {
         print(orientation);
         print(index);
         print("=================");
+
+        setState(() {
+          this.isShowSparkDislike = false;
+          this.isShowSparklike = false;
+        });
 
         if (orientation == CardSwipeOrientation.RECOVER) {
           Navigator.push(
@@ -383,4 +396,140 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
+  Align _showSparkDislike(bool isShow) {
+    if (!isShow) {
+      return Align();
+    }
+    return Align(
+      alignment: Alignment.center,
+      child:
+      // Column(
+      //       children: <Widget>[
+      Container( // 微妙
+        // Stackのサイズ以上のサイズは設定できない
+        // この場合は(height:250 width:250)に縮小されて表示される
+        height: 160.0,
+        width: 160.0,
+        // margin: EdgeInsets.only(bottom: 50, left: 35),
+        // padding: EdgeInsets.only(top: 20),
+        alignment: Alignment.center,
+        child:
+        Stack(
+          children: <Widget>[
+            Pinned.fromPins(
+              Pin(start: 0.0, end: 0.0),
+              Pin(start: 0.0, end: 0.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.elliptical(9999.0, 9999.0)),
+                  color: const Color(0xff6ac4fc),
+                ),
+              ),
+            ),
+            Pinned.fromPins(
+              Pin(size: 54.2, middle: 0.5016),
+              Pin(size: 53.2, middle: 0.4938),
+              child: Stack(
+                children: <Widget>[
+                  Pinned.fromPins(
+                    Pin(start: 0.0, end: 0.0),
+                    Pin(size: 18.3, end: 0.0),
+                    child: SvgPicture.string(
+                      '<svg viewBox="286.2 378.3 54.2 18.3" ><path transform="translate(0.0, -254.73)" d="M 290.9860229492188 651.301513671875 L 290.9860229492188 651.301513671875 C 286.0133361816406 651.301513671875 286.1939392089844 645.81103515625 286.1939392089844 645.81103515625 C 286.1939392089844 645.81103515625 292.5151672363281 633 311.9364013671875 633 C 331.3576354980469 633 340.4000244140625 645.81103515625 340.4000244140625 645.81103515625 C 340.4000244140625 651.3135375976562 335.1744689941406 651.301513671875 335.1744689941406 651.301513671875 C 335.1744689941406 651.301513671875 325.9635314941406 640.3206176757812 311.9123229980469 640.3206176757812 C 297.8731689453125 640.3085327148438 290.9860229492188 651.301513671875 290.9860229492188 651.301513671875 L 290.9860229492188 651.301513671875 Z" fill="#ffffff" stroke="none" stroke-width="1" stroke-miterlimit="10" stroke-linecap="butt" /></svg>',
+                      allowDrawingOutsideViewBox: true,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  Pinned.fromPins(
+                    Pin(size: 14.4, start: 1.4),
+                    Pin(size: 14.4, start: 0.0),
+                    child: SvgPicture.string(
+                      '<svg viewBox="287.6 343.4 14.4 14.4" ><path transform="translate(-10.03, 0.0)" d="M 304.8242797851562 343.3999938964844 C 300.8509216308594 343.3999938964844 297.6000061035156 346.6147766113281 297.6000061035156 350.5760803222656 C 297.6000061035156 354.5373840332031 300.8388671875 357.752197265625 304.8242797851562 357.752197265625 C 308.8216857910156 357.752197265625 312.0485229492188 354.5373840332031 312.0485229492188 350.5760803222656 C 312.0485229492188 346.6147766113281 308.8216857910156 343.3999938964844 304.8242797851562 343.3999938964844 L 304.8242797851562 343.3999938964844 L 304.8242797851562 343.3999938964844 L 304.8242797851562 343.3999938964844 Z" fill="#ffffff" stroke="none" stroke-width="1" stroke-miterlimit="10" stroke-linecap="butt" /></svg>',
+                      allowDrawingOutsideViewBox: true,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  Pinned.fromPins(
+                    Pin(size: 14.4, end: 1.4),
+                    Pin(size: 14.4, start: 0.0),
+                    child: SvgPicture.string(
+                      '<svg viewBox="324.6 343.4 14.4 14.4" ><path transform="translate(-280.51, 0.0)" d="M 612.32421875 343.3999938964844 C 608.3388061523438 343.3999938964844 605.0999755859375 346.6147766113281 605.0999755859375 350.5760803222656 C 605.0999755859375 354.5373840332031 608.3388061523438 357.752197265625 612.32421875 357.752197265625 C 616.3216552734375 357.752197265625 619.5484619140625 354.5373840332031 619.5484619140625 350.5760803222656 C 619.5484619140625 346.6147766113281 616.3216552734375 343.3999938964844 612.32421875 343.3999938964844 L 612.32421875 343.3999938964844 L 612.32421875 343.3999938964844 L 612.32421875 343.3999938964844 Z" fill="#ffffff" stroke="none" stroke-width="1" stroke-miterlimit="10" stroke-linecap="butt" /></svg>',
+                      allowDrawingOutsideViewBox: true,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+          //     Text("DISLIKE!"),
+          // ]
+          // ),
+    );
+  }
+
+  Align _showSparkLike(bool isShow) {
+    if (!isShow) {
+      return Align();
+    }
+    return Align(
+      alignment: Alignment.center,
+      child:
+      Container( // 好き
+        // Stackのサイズ以上のサイズは設定できない
+        // この場合は(height:250 width:250)に縮小されて表示される
+        height: 160.0,
+        width: 160.0,
+        // margin: EdgeInsets.only(bottom: 50, right: 35),
+        // padding: EdgeInsets.only(top: 20),
+        alignment: Alignment.center,
+        child:
+        Stack(
+          children: <Widget>[
+            Pinned.fromPins(
+              Pin(start: 0.0, end: 0.0),
+              Pin(start: 0.0, end: 0.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.elliptical(9999.0, 9999.0)),
+                  color: const Color(0xfffc6a73),
+                ),
+              ),
+            ),
+            Pinned.fromPins(
+              Pin(size: 55.0, middle: 0.5077),
+              Pin(size: 50.0, middle: 0.5143),
+              child:
+              // Adobe XD layer: '817c46f0490bf236f3c…' (group)
+              Stack(
+                children: <Widget>[
+                  Pinned.fromPins(
+                    Pin(start: 0.0, end: 0.0),
+                    Pin(start: 0.0, end: 0.0),
+                    child: Stack(
+                      children: <Widget>[
+                        Pinned.fromPins(
+                          Pin(start: 0.0, end: 0.0),
+                          Pin(start: 0.0, end: 0.0),
+                          child: SvgPicture.string(
+                            '<svg viewBox="0.0 0.0 55.0 50.0" ><path transform="translate(-9.97, -69.7)" d="M 15.52413272857666 101.5954360961914 C 18.93644714355469 106.2780532836914 23.37020683288574 110.0369644165039 27.98356056213379 113.435676574707 C 27.98356056213379 113.435676574707 33.4836540222168 117.3804779052734 36.00921249389648 119.2163467407227 C 36.94086074829102 119.8612060546875 38.13631057739258 119.8612060546875 39.02305603027344 119.2163467407227 C 41.54861831665039 117.3804779052734 47.00381088256836 113.435676574707 47.00381088256836 113.435676574707 C 51.61155700683594 110.0369644165039 55.95552062988281 106.3187484741211 59.4127082824707 101.5954360961914 C 62.33674240112305 97.55765533447266 64.50870513916016 92.78206634521484 64.90719604492188 87.73338317871094 C 65.61433410644531 78.55403137207031 59.89538192749023 69.74649810791016 50.41050720214844 69.74649810791016 C 44.87113189697266 69.74649810791016 39.99398040771484 72.86631774902344 37.50772857666016 77.50250244140625 C 34.94286727905273 72.81983184814453 30.11064338684082 69.69999694824219 24.56563568115234 69.69999694824219 C 15.12565422058105 69.69999694824219 9.316878318786621 78.51336669921875 10.02403450012207 87.68692779541016 C 10.42812538146973 92.73558807373047 12.55520057678223 97.55765533447266 15.52413272857666 101.5954360961914 Z" fill="#ffffff" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>',
+                            allowDrawingOutsideViewBox: true,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
 }
