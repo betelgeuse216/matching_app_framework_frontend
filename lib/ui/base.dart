@@ -6,6 +6,7 @@ import 'package:matching_app_framework/ui/parts/appbar.dart';
 import 'package:matching_app_framework/ui/home.dart';
 import 'package:matching_app_framework/ui/chatlist.dart';
 import 'package:matching_app_framework/ui/favorite.dart';
+import 'package:matching_app_framework/ui/mypage.dart';
 
 
 class BasePage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _BasePageState extends State<BasePage> {
     Home(title: 'Home 0'),
     FavoritePage(pannelColor: Colors.green, title: 'お気に入り'),
     ChatListPage(title: 'Chat List 3'),
-    CustomPage(pannelColor: Colors.pink, title: 'プロフィール'),
+    MypagePage(pannelColor: Colors.pink, title: 'プロフィール'),
   ];
 
   void _onPageChanged(int index) {
@@ -49,7 +50,7 @@ class _BasePageState extends State<BasePage> {
     return Scaffold(
       // appBar: getAppBar(context, AppLocalizations.of(context).title_home),
       body: PageView(
-        physics:new NeverScrollableScrollPhysics(),
+        physics:new NeverScrollableScrollPhysics(), //タブ間のスワイプを無効に
         controller: _pageController,
         onPageChanged: _onPageChanged,
         children: _pageList,
