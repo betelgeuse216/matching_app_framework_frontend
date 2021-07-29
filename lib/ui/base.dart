@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:matching_app_framework/ui/parts/appbar.dart';
 import 'package:matching_app_framework/ui/home.dart';
 import 'package:matching_app_framework/ui/chatlist.dart';
+import 'package:matching_app_framework/ui/favorite.dart';
 
 
 class BasePage extends StatefulWidget {
@@ -18,7 +19,7 @@ class _BasePageState extends State<BasePage> {
 
   static List<Widget> _pageList = [
     Home(title: 'Home 0'),
-    CustomPage(pannelColor: Colors.green, title: 'お気に入り'),
+    FavoritePage(pannelColor: Colors.green, title: 'お気に入り'),
     ChatListPage(title: 'Chat List 3'),
     CustomPage(pannelColor: Colors.pink, title: 'プロフィール'),
   ];
@@ -46,8 +47,9 @@ class _BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context, AppLocalizations.of(context).title_home),
+      // appBar: getAppBar(context, AppLocalizations.of(context).title_home),
       body: PageView(
+        physics:new NeverScrollableScrollPhysics(),
         controller: _pageController,
         onPageChanged: _onPageChanged,
         children: _pageList,
@@ -88,6 +90,7 @@ class _BasePageState extends State<BasePage> {
           ),
         ],
         currentIndex: _selectedIndex,
+        fixedColor: Colors.black,
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
           _selectedIndex = index;
