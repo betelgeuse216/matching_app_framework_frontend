@@ -20,8 +20,11 @@ class _ChatListPageState extends State<ChatListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   title: Text('チャット'),
+      // ),
       body: ListView(
-        // padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.only(top: 60.0),
           children: <Widget>[
             Tile(
               icon: Icons.person,
