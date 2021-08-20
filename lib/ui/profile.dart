@@ -151,6 +151,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+
+                  SizedBox(
+                    height: 40,
+                    width: 100,
+                  ),
+
                   Container(
                     height: MediaQuery.of(context).size.height * 0.6,
                     margin: EdgeInsets.only(

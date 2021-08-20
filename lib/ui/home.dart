@@ -153,7 +153,7 @@ class _HomeState extends State<Home> {
             this.isShowSparkDislike = true;
           });
 
-          sleep(Duration(milliseconds: 600)); //@FIXME unsupported method, need change animation
+          // sleep(Duration(milliseconds: 600)); //@FIXME unsupported method, need change animation
 
         } else if (align.x > 5) {
           print("swipeUpdateCallback - RIGHT");
@@ -164,7 +164,7 @@ class _HomeState extends State<Home> {
             this.isShowSparklike = true;
           });
 
-          sleep(Duration(milliseconds: 600)); //@FIXME unsupported method, need change animation
+          // sleep(Duration(milliseconds: 600)); //@FIXME unsupported method, need change animation
 
         }
         else if (align.x == 0) {
@@ -172,8 +172,8 @@ class _HomeState extends State<Home> {
         }
         setState(() {
           this.isShowExplainLikeDislike = false;
-          this.isShowSparkDislike = false;
-          this.isShowSparklike = false;
+          // this.isShowSparkDislike = false;
+          // this.isShowSparklike = false;
         });
 
       },
